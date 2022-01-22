@@ -7,4 +7,5 @@ routes.get('/',userController.user);
 routes.get('/signup',userController.signup);
 routes.get('/signin',userController.signin);
 routes.post('/create',userController.create);
+routes.post('/create_session',userController.create_session); 
 module.exports=routes;
