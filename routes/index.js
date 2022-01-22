@@ -10,4 +10,5 @@ routes.get('/homepage',homeController.homepage);
 routes.use('/user',require("./user"));
 routes.use('/post',require('./post'));
 
+
 module.exports=routes;
