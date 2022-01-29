@@ -1,0 +1,35 @@
+.header {
+  background-color: blue;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  color: white;
+  width: 100%;
+  flex-wrap: nowrap;
+  font-family: sans-serif;
+}
+.header span {
+  font-weight: bold;
+  font-size: 40px;
+}
+.header .ul {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  font-size: 20px;
+  width: 13%;
+  right: 1px;
+  color: white;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+@media screen and (max-width: 1230px) {
+  .header .ul {
+    width: 30%;
+  }
+}
+
+/*# sourceMappingURL=header.css.map */
