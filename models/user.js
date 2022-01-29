@@ -11,7 +11,7 @@ const userschema=new mongoose.Schema({
     },
     name:{
         type:String,
-        reuire:true
+        require:true
     },
 
 },{

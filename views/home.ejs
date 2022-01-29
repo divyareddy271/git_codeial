@@ -1,3 +1,23 @@
 <link rel="stylesheet" href="/css/home.css">
 <link rel="stylesheet" href="/css/home.css">
 <h1>Hello!!!</h1>
+<section id="feed-posts">
+    <h4>Posts</h4>
+    <form action="/post/createposts" method="post" id="new=post-form">
+        <textarea cols="30" rows="3" placeholder="Type here...." id="new post" name="content"></textarea>
+        <input type="submit" value="Post">
+    </form>
+    <div class="post-user-conatiner">
+        <% for(post of posts) { %>
+        <div class=Posts>
+          <%=post.content %> 
+        </div>
+        <div class="email">
+            <%= post.user.email %>
+        </div>
+        <div class="name">
+            <%= post.user.name %>
+        </div>
+       <% } %>
+    </div>
+</section>
