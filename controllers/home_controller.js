@@ -1,6 +1,6 @@
 
 const User = require('../models/user');
-const Post = require('../models/posts');
+const Post = require('../models/post');
 module.exports.home=function(req,res){
     //get only posts data that is post and user id but not user data
     /*Post.find({}, function(err,posts){

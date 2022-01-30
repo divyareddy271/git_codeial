@@ -1,15 +1,19 @@
-const post = require("../models/posts");
+const post = require("../models/post");
+const comment = require("../models/comment");
 
-module.exports.post=function(req,res){
-    console.log("post controller");
-    post.create({
-        content : req.body.content,
-        user : req.user._id
-    },function(err,post){
-        if (err) {
-            console.log("errror!!!!", err.message);
-            return
-        };
-    })
-    return res.redirect('back');
-}  
+module.exports.post = function (req, res) {
+    if (req.isAuthenticated()) {
+        post.create({
+            content: req.body.content,
+            user: req.user._id,
+            
+        }, function (err, post) {
+            if (err) {
+                console.log("errror!!!!", err.message);
+                return
+            };
+        })
+        return res.redirect('back');
+    }
+    return res.redirect('/user/signin');
+}

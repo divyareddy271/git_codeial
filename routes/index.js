@@ -8,8 +8,7 @@ console.log("Router loaded");
 routes.get('/',homeController.home);
 routes.get('/homepage',homeController.homepage);
 routes.use('/user',require("./user"));
-console.log("posts");
 routes.use('/post',require("./post"));
-
+routes.use('/comment',require("./comment"));
 
 module.exports=routes;
