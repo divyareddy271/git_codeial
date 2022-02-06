@@ -2,6 +2,19 @@ body {
   background-color: #cfdada;
 }
 
+.home_controller {
+  display: flex;
+}
+.home_controller #feed-posts {
+  width: 70%;
+  padding: 10px;
+}
+.home_controller #user_friends {
+  width: 30%;
+  padding: 10px;
+  border-left: 3px solid lightgray;
+}
+
 .post-user-conatiner {
   border: 1px solid black;
   margin: 1px;
@@ -24,7 +37,7 @@ body {
   margin-bottom: 10px;
   margin-top: 10px;
 }
-.post-user-conatiner .Posts {
+.post-user-conatiner .post-details {
   margin-bottom: 10px;
   margin-top: 10px;
 }

@@ -1,6 +1,18 @@
 body{
     background-color:  rgb(207, 218, 218);
 }
+.home_controller{
+    display: flex;
+    #feed-posts{
+        width:70%;
+        padding: 10px;
+    }
+    #user_friends{
+        width:30%;
+        padding: 10px;
+        border-left: 3px solid lightgray;
+    }
+}
 .post-user-conatiner{
     border: 1px solid black;
     margin: 1px;

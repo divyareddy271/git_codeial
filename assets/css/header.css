@@ -12,6 +12,9 @@
   font-weight: bold;
   font-size: 40px;
 }
+.header span a {
+  text-decoration: none;
+}
 .header .ul {
   display: flex;
   align-content: center;

@@ -1,12 +1,23 @@
-const req = require('express/lib/request');
+
 const User = require('../models/user');
 module.exports.profile = function (req, res) {
-   
+    User.findById(req.params.id, function (err,user) {
         return res.render('profile',{
-                    title:"Profile"//here contact is defined in Contact.find({},fun(,contact))
-                })      
-        
-           
+            title:"Profile",
+            profile_user:user,//here contact is defined in Contact.find({},fun(,contact))
+        })      
+
+    })     
+}
+module.exports.update = function (req,res) {
+    if(req.user.id == req.params.id){
+        User.findByIdAndUpdate(req.params.id, req.body,function (err,user) {
+            return res.redirect('back');
+        });
+    }
+    else{
+        return res.staus(401).send('unauthorised');
+    }
 }
 module.exports.user = function (req, res) {
     return res.render('user');
@@ -59,5 +70,5 @@ module.exports.create_session = function (req, res) {
 //Signout 
 module.exports.destroy_session = function (req, res) {
     req.logout();
-   return res.redirect('/');
+   return res.redirect('/user/signin');
 }
