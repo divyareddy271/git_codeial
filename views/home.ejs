@@ -44,7 +44,7 @@
                                         </br>
                                             <%= comment.user.name %>
                                         </p>   
-                                        <% if(locals.user && comment.user.id == locals.user.id || post.user.id == locals.user.id){ %> 
+                                        <% if(locals.user && locals.user.id == comment.user.id  || post.user.id == locals.user.id){ %> 
                                             <a href="/comment/destroy/<%= comment.id %>">delete</a>
                                         <%} %>
                                         <%} %>
