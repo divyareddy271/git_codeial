@@ -3,13 +3,17 @@ const cookieParser = require('cookie-parser');
 const port = 8000;
 var expressLayouts = require('express-ejs-layouts');
 var app = express();
-var db = require("./config/Mongoose.js");
+var db = require("./config/Mongoose");
 const Details = require('./models/user');
 const session = require('express-session');// used for session cookie
 const passport = require('passport');
 const passportLocal = require('./config/Passport_Local_Strategy');
 const MongoStore = require('connect-mongo');//(session);//rempove session in new version
 const sass = require('node-sass');
+const flash = require('connect-flash');
+const customMware = require('./config/Middleware');
+
+
 /*app.use(sass.middleware({
     src : './assets/scss',
     file : './assets/css',
@@ -62,6 +66,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setauthenticatedUser)
+app.use(flash());
+app.use(customMware.setFlash);
 //use express router routes/index
 app.use('/', require('./routes/index'));//('/routes);
 
