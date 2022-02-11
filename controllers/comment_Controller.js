@@ -14,11 +14,12 @@ module.exports.comment = async function (req, res) {
             })
             post.comments.push(comment);
             post.save();
-            return res.redirect('/');
+            req.flash("success","Added comment successfully");
+            return res.redirect('back');
         }
     }
     catch (err) {
-        console.log("Error in comment_controller comment module", err);
+        req.flash("error","Error in adding the comment");
     }
 }
 module.exports.destroy = async function (req, res) {
@@ -30,6 +31,7 @@ module.exports.destroy = async function (req, res) {
             let postId = comment.post;
             comment.remove();
             await Post.findByIdAndUpdate(postId, { $pull: { comments: req.params.id } });
+            req.flash("success","Deleted comment successfully");
             return res.redirect('back');
         } else {
            // console.log("not match",req.user.id,post.user);
@@ -37,7 +39,7 @@ module.exports.destroy = async function (req, res) {
         }
     }
     catch (err) {
-        console.log("Error in comment_controller destroy module", err);
+        req.flash("error","Error in deleting the comment");
     }
 
 }

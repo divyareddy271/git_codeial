@@ -8,9 +8,11 @@ module.exports.post = async function (req, res) {
                 content: req.body.content,
                 user: req.user._id,
             })
+            req.flash("success","created the post is successfull");
             return res.redirect('back');
         }
         else {
+            req.flash("error","Can not create the post");
             return res.redirect('/user/signin');
         }
     }
@@ -24,6 +26,7 @@ module.exports.destroy = async function (req, res) {
     if (post.user == req.user.id) {
         post.remove();
         await Comment.deleteMany({ post: req.params.id });
+        req.flash("success","deleted the post successfully");
         return res.redirect("back");
     }
     else {
@@ -31,7 +34,8 @@ module.exports.destroy = async function (req, res) {
     }
     }
     catch(err){
-        console.log("Error in post_controller destory module", err);
+       req.flash("Error","Cannot delete the post");
+
     }
     
 }

@@ -10,7 +10,7 @@ routes.get('/signin',userController.signin);
 routes.post('/create',userController.create);
 routes.post('/create_session', passport.authenticate(
     'local',
-    {failureRedirect: '/users/sign-in'},
+    {failureRedirect: '/user/signin'},
 ), userController.create_session);
 routes.get('/signout',userController.destroy_session);
 routes.post('/update/:id',passport.checkauthentication,userController.update);
