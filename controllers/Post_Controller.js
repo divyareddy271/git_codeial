@@ -1,5 +1,6 @@
 const Post = require("../models/post");
 const Comment = require("../models/comment");
+const User = require('../models/user');
 
 module.exports.post = async function (req, res) {
     try {
@@ -8,7 +9,19 @@ module.exports.post = async function (req, res) {
                 content: req.body.content,
                 user: req.user._id,
             })
-            req.flash("success","created the post is successfull");
+            if (req.xhr){
+                // if we want to populate just the name of the user (we'll not want to send the password in the API), this is how we do it!
+                post = await post.populate('user')
+    
+                return res.status(200).json({
+                    data: {
+                        post: post
+                    },
+                    message: "Post created!"
+                });
+            }
+    
+            req.flash('success', 'Post published!');
             return res.redirect('back');
         }
         else {
@@ -17,7 +30,7 @@ module.exports.post = async function (req, res) {
         }
     }
     catch (err) {
-        console("Error in post_controller create module", err);
+        console.log("Error in post_controller create module", err);
     }
 }
 module.exports.destroy = async function (req, res) {
@@ -26,7 +39,14 @@ module.exports.destroy = async function (req, res) {
     if (post.user == req.user.id) {
         post.remove();
         await Comment.deleteMany({ post: req.params.id });
-        req.flash("success","deleted the post successfully");
+        if(req.xhr){
+            return res.status(200).json({
+                data : {
+                    post_id : req.params.id,
+                },
+                message : req.flash("success","deleted the post successfully"),
+            })
+        }
         return res.redirect("back");
     }
     else {

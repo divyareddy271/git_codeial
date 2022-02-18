@@ -13,9 +13,10 @@ module.exports.home=async function(req,res){
     //populate post and coresponding user details like name pass and email
     //USING ASYNC AWAIT FUNCTION WITH ERROR HANDLING
     try{
-        let posts = await Post.find({})
+        let posts = await Post.find({}).sort('-createdAt')
         .populate('user').populate({
             path: 'comments',
+            
             populate: {
                 path: 'user'
             }
