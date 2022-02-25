@@ -1,5 +1,6 @@
-
 const User = require('../models/user');
+const fs = require('fs');
+const path = require('path');
 module.exports.profile = async function (req, res) {
     try {
         let user = await User.findById(req.params.id);
@@ -14,7 +15,7 @@ module.exports.profile = async function (req, res) {
 
 }
 module.exports.update = async function (req, res) {
-    try {
+    /*try {
         if (req.user.id == req.params.id) {
             let user = await User.findByIdAndUpdate(req.params.id, req.body)
             return res.redirect('back');
@@ -25,6 +26,33 @@ module.exports.update = async function (req, res) {
     }
     catch (err) {
         console.log("Error in user_controller update module", err);
+    }*/
+    if (req.user.id == req.params.id) {
+        try{
+            let user = await User.findById(req.params.id);
+            User.uploadedavatar(req, res, function(err){
+                if(err){
+                    console.log("***Multer Error***",err);
+                }
+                user.name = req.body.name;
+                user.email = req.body.email;
+                //console.log(req.file+" abcd "+User.avatar_pathloc);
+                if(req.file){
+                    // fs.existsSync() to check if file exists in the uploads folder
+                    if(user.avatar &&  fs.existsSync(path.join(__dirname,'..',user.avatar))){
+                        //remove that file
+                        fs.unlinkSync(path.join(__dirname,'..',user.avatar));
+                    }
+                    user.avatar = User.avatar_pathloc+'/'+req.file.filename;
+                }
+               // console.log(user.avatar);
+                user.save();
+                return res.redirect('back');
+            })
+        }
+        catch (err) {
+            console.log("Error in user_controller update module", err);
+        }
     }
 }
 module.exports.user = function (req, res) {

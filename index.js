@@ -41,6 +41,7 @@ app.use(expressLayouts);//this  is for layouts...place before route
 
 app.set('view engine', 'ejs');
 app.use(express.static('./assets'));//to use static pages
+app.use('/uploads',express.static(__dirname +'/uploads'));
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);//To use seperate links for each and every page'
 

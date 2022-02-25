@@ -1,8 +1,11 @@
 <h1>Profile Page....</h1>
+
 <%if(user.id == profile_user.id) { %>
-    <form action="/user/update/<%= profile_user.id %>" method="post">
+    <img id="img" src="<%= user.avatar %>" alt="<%= user.name%>" style= "width : 100px" />
+    <form action="/user/update/<%= profile_user.id %>" enctype ="multipart/form-data" method="post">
         <input type="text" name="name" placeholder="Your Name" value="<%= profile_user.name %>" required>
         <input type="email" name="email" placeholder="Your Email" value="<%= profile_user.email %>" required>
+        <input type="file" name="avatar" placeholder="Profile Picture"> 
         <input type="submit" value="update">
     </form>
     <%} else {%>
@@ -15,3 +18,9 @@
             </p>
         </h1>
     <% } %>
+    <script>
+        var loadFile = function(event) {
+            var image = document.getElementById('img');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+        </script>
