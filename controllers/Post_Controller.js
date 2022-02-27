@@ -7,8 +7,10 @@ module.exports.post = async function (req, res) {
         if (req.isAuthenticated()) {
             let post = await Post.create({
                 content: req.body.content,
+                
                 user: req.user._id,
             })
+           // console.log(post.user);
             if (req.xhr){
                 // if we want to populate just the name of the user (we'll not want to send the password in the API), this is how we do it!
                 post = await post.populate('user')

@@ -15,13 +15,14 @@ module.exports.home=async function(req,res){
     try{
         let posts = await Post.find({}).sort('-createdAt')
         .populate('user').populate({
-            path: 'comments',
-            
+            path: 'comments', 
             populate: {
                 path: 'user'
             }
         })
+        console.log(posts.user);
         let user = await User.find({})
+        
         return res.render('home',{
             title : "codeials | home",
             posts : posts,

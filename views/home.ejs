@@ -14,6 +14,7 @@
                     <div class="list">
                         <% for(post of posts) { %>
                             <div  class="borders">
+                                <p><%= post.user.name %> </p>
                                 <%- include('_post') -%>
                             </div>
                             <% } %>
